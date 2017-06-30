@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- xmlns默认会加,HTML 的 lang 属性可用于网页或部分网页的语言。这对搜索引擎和浏览器是有帮助的 -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- ... 这是一段注释.注释不会在浏览器中显示. -->
+
+<!-- html 标签之间描述网页内容 -->
+<head>
+    <meta charset="UTF-8">
+    <title>标题(title) 支持全局属性</title>
+
+    <!-- 定义样式 -->
+    <style type="text/css">
+        h1.intro {
+            color: blue;
+        }
+
+        p.important {
+            color: green;
+        }
+    </style>
+
+    <!--suppress JSValidateTypes -->
+    <script type="text/javascript">
+        /*全局属性 id*/
+        function change_header() {
+            document.getElementById("myHeader").innerHTML = "Nice Day!";
+        }
+
+        /*全局Window事件*/
+        function load() {
+            alert("展示全局事件:onload---页面已加载!");
+        }
+        function unload() {
+            alert("展示全局事件:onunload---再见!");
+        }
+
+        /*Form(所有元素)事件*/
+        function upperCase() {
+            var x = document.getElementById("first name").value;
+            document.getElementById("first name").value = x.toUpperCase();
+        }
+        function checkField(val) {
+            alert("输入值已更改.新指是:" + val);
+        }
+        function setStyle(x) {
+            document.getElementById(x).style.background = "yellow";
+        }
+        function showMsg() {
+            alert("你选中了一些文本! ");
+        }
+        function checkForm() {
+            alert("表单已经提交!");
+        }
+        function displayResult() {
+            var x;
+            x = event.which;
+            var keychar = String.fromCharCode(x);
+            alert("按键 " + keychar + "被按下");
+        }
+        function copyText() {
+            document.getElementById("field2").value = document.getElementById("field1").value;
+        }
+        function mouseDown() {
+            document.getElementById("p1").style.color = "red";
+        }
+        function mouseUp() {
+            document.getElementById("p1").style.color = "green";
+        }
+        function bigImage(x) {
+            x.style.height = "180px";
+            x.style.width = "180px";
+        }
+        function normalImage(x) {
+            x.style.height = "128px";
+            x.style.width = "128px";
+        }
+    </script>
+</head>
+
+<body onload="load()" onunload="unload()">
+<div>
+    <h1>下面介绍全局属性</h1>
+    <p>展示accessKey属性
+        <br/>
+        <a href="http://www.w3school.com.cn/html/" accesskey="h">HTML</a>
+        <br/>
+        <a href="http://www.w3school.com.cn/css/" accesskey="c">CSS</a>
+    </p>
+    <hr/>
+
+    <!-- class -->
+    <h1 class="intro">展示全局属性:class的用法</h1>
+    <p class="important">展示全局属性:class的用法</p>
+    <hr/>
+
+    <!-- 段落 -->
+    <p dir="rtl">展示全局属性p的用法:一段方向从右向左的段落</p>
+    <p dir="ltr">展示全局属性p的用法:一段方向从左向右的段落</p>
+    <hr/>
+
+    <!-- 展示全局属性的 id -->
+    <h1 id="myHeader">展示全局属性的 id的用法: Hello World!</h1>
+    <button onclick="change_header()">Change Text</button>
+    <hr/>
+
+    <!-- style -->
+    <h1 style="color: blue; text-align: center">展示全局属性style的用法:规定元素的行内样式:This is a Header</h1>
+    <p style="color: red;">展示全局属性style的用法:This is a paragraph.</p>
+    <hr/>
+
+    <!-- tab -->
+    <a href="http://www.w3school.com.cn/" tabindex="2">tab键控制顺序:我是第二</a>
+    <a href="http://www.baidu.com/" tabindex="1">tab键控制顺序:我是第一</a>
+    <a href="http://www.microsoft.com/" tabindex="3">tab键控制顺序:我是第三</a>
+    <hr/>
+
+    <!-- title 属性 -->
+    <p title="Free Web tutorials">规定元素的额外信息:通常鼠标移到元素上时显示一段工具提示文本</p>
+    <hr/>
+</div>
+<div>
+    <h1>全局(window)事件参考body元素</h1>
+    <hr/>
+
+    <h1>下面介绍Form事件</h1>
+    <p>onblur 当用户离开字段时,对其进行验证:将小写变为大写</p>
+    <input title="输入英文小写" type="text" name="first name" id="first name" onblur="upperCase()">
+    <br/>
+
+    <p>onchange 当用户离开字段时,当值改变时检查输入字段</p>
+    <input title="请修改输入字段中的文本，然后在字段外点击以触发 onchange" type="text" name="change my text" value="Hell world"
+           onchange="checkField(this.value)">
+    <br/>
+
+    <p>onfocus 当输入字段获得焦点时触发函数。此函数改变输入字段的背景色。</p>
+    <input type="text" id="last name" value="点我" title="点了背景会变为黄色" onfocus="setStyle(this.id)">
+    <br/>
+
+    <p>onselect 可用于以下元素内： &lt;;input type="file"&gt;;&lt;input type="password"&gt;、&lt;input
+        type="text"&gt;、&lt;keygen&gt; 以及 &lt;textarea&gt;."</p>
+    <input type="text" value="请选中我!" title="选了会弹出对话框" onselect="showMsg()">
+    <br/>
+
+    <p>onsubmit 当提交表单时执行一段 JavaScript</p>
+    <form action="./Resources/ASP/demo_form.asp" onsubmit="checkForm()">
+        姓名: <input type="text" name="your name" title="还没有写asp,运行了没有任何反馈">
+        <input type="submit" value="提交">
+    </form>
+    <hr/>
+
+    <h1>下面介绍Keyboard事件</h1>
+    <p>onkeydown 当用户压下时执行一段 JavaScript</p>
+    <input type="text" title="会将按下的键显示出来" onkeydown="displayResult()">
+    <br/>
+
+    <p>onkeypress 当用户压下时执行一段 JavaScript</p>
+    <input type="text" title="会将按下的键显示出来" onkeypress="displayResult()">
+    <br/>
+
+    <p>onkeyup 当用户放松按键时执行一段 JavaScript</p>
+    <input type="text" title="会将按下的键显示出来" onkeyup="displayResult()">
+    <br/>
+
+    <h1>下面介绍 Mouse 事件</h1>
+    <p>onclick 当点击按钮时执行一段 JavaScript</p>
+    Field1: <input type="text" id="field1" value="Hello world!" title="复制源">
+    <br/>
+    Field2: <input type="text" id="field2" title="复制目的地">
+    <br/>
+    单击复制:
+    <button onclick="copyText()">复制文本</button>
+    <br/>
+    双击复制:
+    <button ondblclick="copyText()">复制文本</button>
+    <br/>
+
+    <p id="p1" onmousedown="mouseDown()" onmouseup="mouseUp()">onmousedown onmouseup 请点击文本！mouseDown() 函数当鼠标按钮在段落上被按下时触发。此函数把文本颜色设置为红色。mouseUp() 函数在鼠标按钮被释放时触发。mouseUp() 函数把文本的颜色设置为绿色。 </p>
+
+    <p>onmousemove onmouseout 当鼠标指针移动到图像上时执行一段 JavaScript</p>
+    <img onmousemove="bigImage(this)" onmouseout="normalImage(this)" border="0" src="./Resources/GIF/eg_smile.gif">
+
+    <p>onmouseover onmouseout 同样的功能 当鼠标指针移动到图像上时执行一段 JavaScript</p>
+    <img onmouseover="bigImage(this)" onmouseout="normalImage(this)" border="0" src="./Resources/GIF/eg_smile.gif">
+
+</div>
+<div>
+    <h1>下面介绍HTML 基础元素</h1>
+    <!-- body 标签之间描述可见的页面内容 -->
+    <h1>h1标题</h1>
+    <h2>h2标题</h2>
+    <h3>h3标题</h3>
+    <h4>h4标题</h4>
+    <h5>h5标题</h5>
+    <h6>h6标题</h6>
+
+    <!-- p 之间的文本被显示为段落 -->
+    <p>p显示为段落</p>
+
+    <!-- br 定义简单的折行 -->
+    <br/>
+
+    <!-- hr 定义水平线 -->
+    <hr/>
+
+</div>
+<div>
+    <h1>下面介绍HTML的格式</h1>
+
+    <p>
+        根据 HTML5 规范，在没有其他合适标签更合适时，才应该把 &lt;b&gt; 标签作为最后的选项。<br/>
+        HTML5 规范声明：应该使用 &lt;h1&gt; - &lt;h6&gt; 来表示标题，<br/>
+        使用 &lt;mark&gt; 标签来表示标注的/突出显示的文本。<br/>
+        使用 &lt;strong&gt; 标签来表示重要文本，<br/>
+        使用 &lt;em&gt; 标签来表示强调的文本，<br/>
+    </p>
+
+    <p>
+        acronym 定义只取首字母的缩写。
+        <acronym title="World Wild Web">WWW</acronym>
+    </p>
+
+    <p>
+        abbr 定义缩写
+        The <abbr title="Pepole's Republic Of China">PRC</abbr> was founded in 1949.
+    </p>
+
+
+    <p>
+        这是普通文本<br/>
+        <strong>&lt;strong&gt;这是使用&lt;strong&gt;把文本定义为语气更强的强调的内容。</strong>
+    </p>
+
+    <p>
+        <em>&lt;em&gt;把文本定义为强调的内容</em>
+    </p>
+
+    <p>
+        <i>&lt;i&gt;显示斜体文本效果。</i>
+    </p>
+
+    <p>
+        <big>&lt;big&gt;呈现大号字体效果。</big>
+    </p>
+
+    <p>
+        <small>&lt;small&gt;呈现小号字体效果。</small>
+     </p>
+
+    <p>
+        <tt>&lt;tt&gt; 呈现类似打字机或者等宽的文本效果。</tt>
+    </p>
+
+    <p>
+        <b>&lt;b&gt; 定义的粗体文本</b>。
+    </p>
+
+    <p>
+        &lt;sub&gt;定义下标文本 <sub>将会以当前文本流中字符高度的一半来显示，但是与当前文本流中文字的字体和字号都是一样的。</sub>
+    </p>
+
+    <p>
+        &lt;sup&gt;定义上标文本 <sup>将会以当前文本流中字符高度的一半来显示，但是与当前文本流中文字的字体和字号都是一样的。</sup>
+    </p>
+
+    <p>
+        <del>&lt;del&gt;定义文档中已被删除的文本。</del>
+    </p>
+
+
+    <p>
+        <bdo dir="rtl">&lt;bdo&gt; 可覆盖默认的文本方向。</bdo>
+     </p>
+
+
+    <p>
+        &lt;q&gt;这是短的引用。请注意，<q>浏览器在引用的周围插入了引号。 </q>
+     </p>
+
+    <p>
+        <dfn>&lt;dfn&gt;定义一个定义项目。</dfn>
+     </p>
+
+    <p>
+        <code>&lt;code&gt;定义计算机代码文本。</code>
+     </p>
+
+    <p>
+        <samp>&lt;samp&gt;定义样本文本。</samp>
+    </p>
+
+    <p>
+        <kbd>&lt;kbd&gt;定义键盘文本。它表示文本是从键盘上键入的。它经常用在与计算机相关的文档或手册中。</kbd>
+    </p>
+
+    <p>
+        <var>&lt;var&gt;定义变量。您可以将此标签与 &lt;pre&gt; 及 &lt;code&gt; 标签配合使用。</var>
+    </p>
+
+    <p>
+        <cite>&lt;cite&gt;定义引用。可使用该标签对参考文献的引用进行定义，比如书籍或杂志的标题</cite>
+    </p>
+
+    <address> address 定义文档作者或拥有者的联系信息。
+        Written by <a href="mailto:webmaster@example.com">Donald Duck</a>.<br/>
+        Visit us at:<br/>
+        Example.com<br/>
+        Box 564, Disneyland<br/>
+        USA
+    </address>
+    <br/>
+
+    <pre>&lt;pre&gt;//元素可定义预格式化的文本。被包围在 pre 元素中的文本通常会保留空格和换行符。而文本也会呈现为等宽字体。
+        for i = 1 to 10
+             print i
+        next i
+    </pre>
+    <br/>
+
+    <blockquote>&lt;blockquote&gt; 所有文本都会从常规文本中分离出来，经常会在左、右两边进行缩进（增加外边距），而且有时会使用斜体。也就是说，块引用拥有它们自己的空间。</blockquote>
+    <br/>
+
+</div>
+<!-- HTML 衔接 -->
+<a href="http://www.w3school.com.cn">This is a link</a>
+
+<!-- HTML 图像 -->
+<img src="Resources/GIF/eg_w3school.gif" width="365" height="49"/>
+</body>
+</html>
