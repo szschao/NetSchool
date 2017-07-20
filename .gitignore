@@ -1,4 +1,8 @@
-
+# mac
 .DS_Store
-
 .idea/*
+
+# npm
+node_modules
+*.log
+*.gz
