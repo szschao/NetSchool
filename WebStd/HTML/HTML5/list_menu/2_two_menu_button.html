@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- A context menu for a simple editor, containing two menu buttons. -->
+<menu>
+    <li>
+        <button type="menu" value="File" menu="file-menu">
+            <menu type="context" id="file-menu">
+                <menuitem label="Save..." onclick="saveFile()">Save</menuitem>
+            </menu>
+        </button>
+    </li>
+    <li>
+        <button type="menu" value="Edit" menu="edit-menu">
+            <menu type="context" id="edit-menu">
+                <menuitem label="Cut..." onclick="cutEdit()">Cut</menuitem>
+                <menuitem label="Copy..." onclick="copyEdit()"/>
+                <menuitem label="Paste..." onclick="pasteEdit()"/>
+            </menu>
+        </button>
+    </li>
+</menu>
+</body>
+</html>

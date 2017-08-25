@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>area</title>
+</head>
+<body>
+    <p>map 带有可点击区域的图像映射</p>
+    <img src="../../../../Resources/JPG/eg_planets.jpg" alt="显示一张星球的图片" border="0" usemap="#planet_map"/>
+    <map name="planet_map" id="planet_map">
+        <area alt="在新窗口打开金星" shape="circle" coords="180,139,14" href="../../../../Resources/HTML/venus.html" target="_blank"/>
+        <area alt="在新窗口打开水星" shape="circle" coords="129,161,10" href="../../../../Resources/HTML/mercury.html" target="_blank"/>
+        <area alt="在新窗口打开太阳" shape="circle" coords="0,0,260" href="../../../../Resources/HTML/sun.html" target="_blank"/>
+        <area shape="default" nohref="">
+    </map>
+</body>
+</html>

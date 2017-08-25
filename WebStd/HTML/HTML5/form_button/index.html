@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>button</title>
+</head>
+<body>
+    <p>
+        <button type="button" autofocus>&lt;button autofocus&gt;</button>
+        <button type="button" disabled>&lt;button disabled&gt;</button>
+        <button type="button" value="init value">&lt;button init value&gt;</button>
+    </p>
+    <p>
+        <form id="test"></form>
+        <button type="button" form="test">&lt;button form&gt;</button>
+        <button type="button" formaction="test();">&lt;button action&gt;</button>
+        <!--还有其他的 formxxx 属性可以重写 form 元素-->
+    </p>
+    <p>
+        <button type="submit">&lt;button submit&gt;</button>
+        <button type="reset">&lt;button reset&gt;</button>
+    </p>
+
+    <p>
+    <!--使用简单的APS 代替下面这个 example 里的asp-->
+    <form action="/example/html5/demo_form.asp" method="get">
+            用户名：<input type="text" name="usr_name" />
+            加密：<keygen name="security" />
+            <input type="submit" />
+        </form>
+    </p>
+</body>
+</html>

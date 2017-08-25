@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>stylesheet load event</title>
+</head>
+
+<body>
+    <script>
+        function sheetLoaded() {
+            // Do something interesting; the sheet has been loaded
+        }
+
+        function sheetError() {
+            alert("An error occurred loading the stylesheet!");
+        }
+    </script>
+
+    <link rel="stylesheet" href="mystylesheet.css" onload="sheetLoaded()" onerror="sheetError()">
+</body>
+</html>
