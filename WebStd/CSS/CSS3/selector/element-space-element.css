@@ -1,0 +1,5 @@
+/*选择 <div> 元素内部的所有 <p> 元素。*/
+div p
+{
+    background-color:chartreuse;
+}

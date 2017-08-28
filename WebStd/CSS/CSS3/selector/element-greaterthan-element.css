@@ -1,0 +1,5 @@
+/*选择紧接在 <div> 元素之后的所有 <p> 元素*/
+div>p
+{
+    background-color:#AAEEAA;
+}
