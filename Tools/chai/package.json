@@ -1,0 +1,12 @@
+{
+  "name": "my-chai-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^3.1.0",
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha --check-leaks --bail --color ./test/*.test.js ./test/**/*.test.js"
+  }
+}

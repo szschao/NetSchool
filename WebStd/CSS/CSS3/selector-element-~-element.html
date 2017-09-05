@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>element~element</title>
+    <link href="selector/element~element.css" rel="stylesheet">
+</head>
+<body>
+
+    <div> 相同的父元素是 body,但不是p之后的 ul 元素,所以下面的列表应该不变色 </div>
+    <ul>
+        <li>咖啡</li>
+        <li>牛奶</li>
+        <li>茶</li>
+    </ul>
+
+    <p>第一段 (这个列表应该要表色) </p>
+    <ul>
+        <li>咖啡</li>
+        <li>牛奶</li>
+        <li>茶</li>
+    </ul>
+
+    <h2>另一个列表 (即使隔了一个 h2 ,改列表也要变色 )</h2>
+    <ul>
+        <li>咖啡</li>
+        <li>牛奶</li>
+        <li>茶</li>
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "my-should-test",
+  "version": "1.0.0",
+  "devDependencies": {
+    "should": "^11.2.1",
+    "chai": "^3.1.0",
+    "request": "2.74.0",
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha --check-leaks --bail --color ./test/*.test.js ./test/**/*.test.js"
+  }
+}

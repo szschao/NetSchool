@@ -1,4 +1,5 @@
-.intro
+/* 等同于 [class~=classname] */
+div.intro
 {
     background-color:yellow;
 }

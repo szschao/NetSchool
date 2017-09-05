@@ -1,3 +1,4 @@
+/*在lang属性中 以 单词en 开头,然后以 - 分隔*/
 p[lang|=en]
 {
     background-color:salmon;

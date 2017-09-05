@@ -1,0 +1,5 @@
+/*选择其 src 属性中包含 "test" 子串的每个 <a> 元素。*/
+div[class*="test"]
+{
+    background:cornflowerblue;
+}

@@ -1,7 +1,7 @@
 /**
  * Created by sunchao on 2017/07/19.
  */
-var add = require('./add.js');
+var add = require('../api/add.js');
 var expect = require('chai').expect;
 
 describe('加法函数的测试', function() {

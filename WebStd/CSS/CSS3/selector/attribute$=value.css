@@ -1,0 +1,5 @@
+/*设置 class 属性值以 "test" 结尾的所有 div 元素的背景色*/
+div[class$="test"]
+{
+    background:teal;
+}
