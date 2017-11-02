@@ -1,0 +1,11 @@
+{
+  "name": "1_sqrt_without_mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover sqrt.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

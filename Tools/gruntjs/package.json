@@ -1,0 +1,13 @@
+{
+  "name": "grunt-sample",
+  "version": "1.0.0",
+  "description": "This is a grunt sample.Test Install Enviroments",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sunchao",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~1.0.1"
+  }
+}
