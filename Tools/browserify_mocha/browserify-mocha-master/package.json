@@ -1,0 +1,22 @@
+{
+  "name": "browserify",
+  "version": "1.0.0",
+  "description": "browserify and mocha testing",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "browserify",
+    "mocha"
+  ],
+  "author": "Craig Buckler",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.21.5",
+    "should": "^4.1.0"
+  }
+}

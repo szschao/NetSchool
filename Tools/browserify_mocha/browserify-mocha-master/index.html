@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Browserify test</title>
+</head>
+<body>
+
+<h1>Browserify test</h1>
+
+<p>Install Browserify:</p>
+<pre><code>npm install -g browserify</code></pre>
+
+<p>Compile JS with:</p>
+<pre><code>browserify main.js -o main.all.js</code></pre>
+
+<p>It works nicely but probably overkill for smaller projects where it's easy to manage your own dependencies.</p>
+
+<p>See <a href="http://browserify.org/">browserify.org</a>.</p>
+
+<h2>Mocha testing</h2>
+
+<p>Run tests in test folder using:</p>
+<pre><code>mocha</code></pre>
+
+<p>or</p>
+<pre><code>npm test</code></pre>
+
+<p>See <a href="http://mochajs.org/">mochajs.org</a>.</p>
+
+<script src="main.all.js"></script>
+
+</body>
+</html>

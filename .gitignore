@@ -11,4 +11,4 @@ node_modules
 coverage
 
 #test
-browserify_mocha
+*.zip
