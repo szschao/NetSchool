@@ -9,3 +9,6 @@ node_modules
 
 #istanbul
 coverage
+
+#test
+browserify_mocha

@@ -1,0 +1,16 @@
+{
+  "name": "1_sqrt_without_mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/*.test.js ./test/**/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jsdom": "11.3.0",
+    "jsdom-global": "3.0.2",
+    "tape": "^4.8.0"
+  }
+}

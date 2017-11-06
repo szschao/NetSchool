@@ -1,0 +1,19 @@
+{
+  "name": "hundreder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "tape": "^4.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "tape test/*.js",
+    "build": "browserify test/beep.js test/boop > bundle.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

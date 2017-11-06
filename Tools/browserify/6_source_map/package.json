@@ -1,0 +1,17 @@
+{
+  "build": "browserify browser.js -o static/bundle.js",
+  "watch": "watchify browser.js -o static/bundle.js --debug --verbose",
+  "name": "6_source_map",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "build": "browserify main.js -o static/bundle.js",
+    "watch": "watchify main.js -o static/bundle.js --debug --verbose"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "grunt-browserify": "^5.2.0"
+  }
+}
