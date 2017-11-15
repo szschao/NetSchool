@@ -12,7 +12,7 @@ module.exports = function (grunt) {
         jshint: {
             files: [
                 '**/*.js',
-                'Gruntfile.js',
+                '!Gruntfile.js',
                 '!node_modules/**/*',
                 '!browser/example/lib/**/*',
                 '!browser/dist/**/*',
@@ -140,7 +140,5 @@ module.exports = function (grunt) {
         'connect:server',
         'mocha_phantomjs'
     ]);
-
-    grunt.registerTask('cleanup', ['clean:folder']);
 };
 /* jshint +W106 */
