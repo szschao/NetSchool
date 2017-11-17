@@ -12,3 +12,15 @@ coverage
 
 #test
 *.zip
+
+# Logs
+logs
+*.log
+npm-debug.log*
+errorShots
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history

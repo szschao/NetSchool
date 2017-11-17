@@ -48,10 +48,12 @@ module.exports = {
 };
 
 },{}],4:[function(require,module,exports){
-require('../../test/one.js');
-require('../../test/two.js');
+require('../../test/one.test.js');
+require('../../test/sqrt.test.js');
+require('../../test/two.test.js');
 
-},{"../../test/one.js":107,"../../test/two.js":108}],5:[function(require,module,exports){
+},{"../../test/one.test.js":108,"../../test/sqrt.test.js":109,"../../test/two.test.js":110}],5:[function(require,module,exports){
+"use strict";
 var util = require('util');
 
 exports.mult = function(a, b) {
@@ -13169,6 +13171,8 @@ var addTimerReturnsObject = typeof timeoutResult === "object";
 var hrtimePresent = (global.process && typeof global.process.hrtime === "function");
 var nextTickPresent = (global.process && typeof global.process.nextTick === "function");
 var performancePresent = (global.performance && typeof global.performance.now === "function");
+var requestAnimationFramePresent = (global.requestAnimationFrame && typeof global.requestAnimationFrame === "function");
+var cancelAnimationFramePresent = (global.cancelAnimationFrame && typeof global.cancelAnimationFrame === "function");
 
 clearTimeout(timeoutResult);
 
@@ -13329,12 +13333,21 @@ function addTimer(clock, timer) {
         throw new Error("Callback must be provided to timer calls");
     }
 
+    timer.type = timer.immediate ? "Immediate" : "Timeout";
+
     if (timer.hasOwnProperty("delay")) {
         timer.delay = timer.delay > maxTimeout ? 1 : timer.delay;
+        timer.delay = Math.max(0, timer.delay);
     }
 
     if (timer.hasOwnProperty("interval")) {
+        timer.type = "Interval";
         timer.interval = timer.interval > maxTimeout ? 1 : timer.interval;
+    }
+
+    if (timer.hasOwnProperty("animation")) {
+        timer.type = "AnimationFrame";
+        timer.animation = true;
     }
 
     if (!clock.timers) {
@@ -13461,16 +13474,6 @@ function callTimer(clock, timer) {
     }
 }
 
-function timerType(timer) {
-    if (timer.immediate) {
-        return "Immediate";
-    }
-    if (timer.interval !== undefined) {
-        return "Interval";
-    }
-    return "Timeout";
-}
-
 function clearTimer(clock, timerId, ttype) {
     if (!timerId) {
         // null appears to be allowed in most browsers, and appears to be
@@ -13491,11 +13494,13 @@ function clearTimer(clock, timerId, ttype) {
     if (clock.timers.hasOwnProperty(timerId)) {
         // check that the ID matches a timer of the correct type
         var timer = clock.timers[timerId];
-        if (timerType(timer) === ttype) {
+        if (timer.type === ttype) {
             delete clock.timers[timerId];
         } else {
-            throw new Error("Cannot clear timer: timer created with set" + timerType(timer)
-                            + "() but cleared with clear" + ttype + "()");
+            var clear = ttype === "AnimationFrame" ? "cancelAnimationFrame" : "clear" + ttype;
+            var schedule = timer.type === "AnimationFrame" ? "requestAnimationFrame" : "set" + timer.type;
+            throw new Error("Cannot clear timer: timer created with " + schedule
+                            + "() but cleared with " + clear + "()");
         }
     }
 }
@@ -13529,6 +13534,14 @@ function uninstall(clock, target, config) {
 
     // Prevent multiple executions which will completely remove these props
     clock.methods = [];
+
+    // return pending timers, to enable checking what timers remained on uninstall
+    if (!clock.timers) {
+        return [];
+    }
+    return Object.keys(clock.timers).map(function mapper(key) {
+        return clock.timers[key];
+    });
 }
 
 function hijackMethod(target, method, clock) {
@@ -13580,6 +13593,14 @@ if (performancePresent) {
     timers.performance = global.performance;
 }
 
+if (requestAnimationFramePresent) {
+    timers.requestAnimationFrame = global.requestAnimationFrame;
+}
+
+if (cancelAnimationFramePresent) {
+    timers.cancelAnimationFrame = global.cancelAnimationFrame;
+}
+
 var keys = Object.keys || function (obj) {
     var ks = [];
     var key;
@@ -13596,14 +13617,15 @@ var keys = Object.keys || function (obj) {
 exports.timers = timers;
 
 /**
- * @param now {Date|number} the system time
+ * @param start {Date|number} the system time
  * @param loopLimit {number}  maximum number of timers that will be run when calling runAll()
  */
-function createClock(now, loopLimit) {
+function createClock(start, loopLimit) {
+    start = start || 0;
     loopLimit = loopLimit || 1000;
 
     var clock = {
-        now: getEpoch(now),
+        now: getEpoch(start),
         hrNow: 0,
         timeouts: {},
         Date: createDate(),
@@ -13611,6 +13633,10 @@ function createClock(now, loopLimit) {
     };
 
     clock.Date.clock = clock;
+
+    function getTimeToNextFrame() {
+        return 16 - ((clock.now - start) % 16);
+    }
 
     clock.setTimeout = function setTimeout(func, timeout) {
         return addTimer(clock, {
@@ -13652,6 +13678,21 @@ function createClock(now, loopLimit) {
 
     clock.clearImmediate = function clearImmediate(timerId) {
         return clearTimer(clock, timerId, "Immediate");
+    };
+
+    clock.requestAnimationFrame = function requestAnimationFrame(func) {
+        var result = addTimer(clock, {
+            func: func,
+            delay: getTimeToNextFrame(),
+            args: [clock.now + getTimeToNextFrame()],
+            animation: true
+        });
+
+        return result.id || result;
+    };
+
+    clock.cancelAnimationFrame = function cancelAnimationFrame(timerId) {
+        return clearTimer(clock, timerId, "AnimationFrame");
     };
 
     function updateHrTime(newNow) {
@@ -13744,6 +13785,10 @@ function createClock(now, loopLimit) {
         throw new Error("Aborting after running " + clock.loopLimit + " timers, assuming an infinite loop!");
     };
 
+    clock.runToFrame = function runToFrame() {
+        return clock.tick(getTimeToNextFrame());
+    };
+
     clock.runToLast = function runToLast() {
         var timer = lastTimer(clock);
         if (!timer) {
@@ -13830,7 +13875,7 @@ exports.install = function install(config) {
     var clock = createClock(config.now, config.loopLimit);
 
     clock.uninstall = function () {
-        uninstall(clock, target, config);
+        return uninstall(clock, target, config);
     };
 
     clock.methods = config.toFake || [];
@@ -24253,7 +24298,11 @@ module.exports = {
 }(this || {}));
 },{"./encoding-indexes.js":103}],105:[function(require,module,exports){
 (function (global){
-'use strict';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.typeDetect = factory());
+}(this, (function () { 'use strict';
 
 /* !
  * type-detect
@@ -24261,8 +24310,20 @@ module.exports = {
  * MIT Licensed
  */
 var promiseExists = typeof Promise === 'function';
-var globalObject = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : self; // eslint-disable-line
-var isDom = 'location' in globalObject && 'document' in globalObject;
+
+/* eslint-disable no-undef */
+var globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
+
+/*
+ * All of these attributes must be available on the global object for the current environment
+ * to be considered a DOM environment (browser)
+ */
+var isDom = typeof window === 'object' &&
+  'document' in window &&
+  'navigator' in window &&
+  'HTMLElement' in window;
+/* eslint-enable */
+
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
 var setExists = typeof Set !== 'undefined';
@@ -24291,7 +24352,7 @@ var toStringRightSliceLength = -1;
  * @return {String} object type
  * @api public
  */
-module.exports = function typeDetect(obj) {
+function typeDetect(obj) {
   /* ! Speed optimisation
    * Pre:
    *   string literal     x 3,039,035 ops/sec ±1.62% (78 runs sampled)
@@ -24415,7 +24476,7 @@ module.exports = function typeDetect(obj) {
      * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
      *  - IE <=10 === "[object HTMLBlockElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'BLOCKQUOTE') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'BLOCKQUOTE') {
       return 'HTMLQuoteElement';
     }
 
@@ -24431,7 +24492,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'TD') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TD') {
       return 'HTMLTableDataCellElement';
     }
 
@@ -24447,7 +24508,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'TH') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TH') {
       return 'HTMLTableHeaderCellElement';
     }
   }
@@ -24620,12 +24681,16 @@ module.exports = function typeDetect(obj) {
     .toString
     .call(obj)
     .slice(toStringLeftSliceLength, toStringRightSliceLength);
-};
+}
 
-module.exports.typeDetect = module.exports;
+return typeDetect;
+
+})));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],106:[function(require,module,exports){
+"use strict";
+
 var minimatch = require('minimatch');
 
 var helper = require('../lib/helper');
@@ -24660,6 +24725,18 @@ module.exports = {
 };
 
 },{"../lib/echo":1,"../lib/helper":5,"../lib/optional":7,"minimatch":2}],107:[function(require,module,exports){
+"use strict";
+
+var My = {
+    sqrt:function (x) {
+        if(x<0) {throw new Error("负值没有平方根");}
+        return Math.exp(Math.log(x)/2);
+    }
+};
+module.exports = My;
+},{}],108:[function(require,module,exports){
+"use strict";
+
 var myModule = require('../src/mymodule');
 
 var chai = require('chai');
@@ -24695,7 +24772,26 @@ describe('My browserified tests', function() {
   });
 });
 
-},{"../src/mymodule":106,"chai":8,"sinon":67,"sinon-chai":66}],108:[function(require,module,exports){
+},{"../src/mymodule":106,"chai":8,"sinon":67,"sinon-chai":66}],109:[function(require,module,exports){
+"use strict";
+
+var chai = require('chai');
+var expect = chai.expect;
+var My = require('../src/sqrt.js');
+
+describe("sqrt", function() {
+
+    it("4的平方根应该等于2", function() {
+        expect(My.sqrt(4)).to.equal(2);
+    });
+
+    it("参数为负值时应该报错", function() {
+        expect(function(){ My.sqrt(-1); }).to.throw("负值没有平方根");
+    });
+
+});
+
+},{"../src/sqrt.js":107,"chai":8}],110:[function(require,module,exports){
 (function (process){
 var myModule = require('../src/mymodule');
 

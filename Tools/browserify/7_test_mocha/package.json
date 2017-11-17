@@ -2,8 +2,11 @@
   "name": "1_sqrt_without_mocha",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
+    "api": "browserify -r ./api/sqrt.js:mymodule > bundle.js",
+    "build":"browserify ./test/sqrt.test.js > bundle.js",
+    "standlone":"browserify ./api/sqrt.js -s mymodule > bundle.js",
     "test": "mocha ./test/*.test.js ./test/**/*.test.js"
   },
   "author": "",

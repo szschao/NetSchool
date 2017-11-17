@@ -1,10 +1,10 @@
 {
   "name": "mymodule",
   "version": "0.1.0",
-  "author": "Bastian Krol",
+  "author": "sunchao",
   "description": "example project template for a cross platform (node and browser) javascript module",
-  "repository": "https://github.com/basti1302/browserify-grunt-mocha-template.git",
   "scripts": {
+    "coverage":"istanbul cover ./node_modules/mocha/bin/_mocha -- ./test/**/*.test.js -R spec --colors --bail --require chai --slow 200 --timeout 500 --check-leaks --recursive",
     "test": "grunt"
   },
   "main": "mymodule",
@@ -23,9 +23,11 @@
     "grunt-contrib-watch": "~1.0.0",
     "grunt-mocha-phantomjs": "~4.0.0",
     "grunt-mocha-test": "~0.13.3",
+    "istanbul": "~0.4.5",
     "mocha": "~4.0.1",
     "sinon": "~4.1.1",
-    "sinon-chai": "~2.14.0"
+    "sinon-chai": "~2.14.0",
+    "request": "~2.83.0"
   },
   "browser": {
     "./lib/echo.js": "./browser/lib/shim/echo.js",
