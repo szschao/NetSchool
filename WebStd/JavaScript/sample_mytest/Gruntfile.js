@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/**/*.js']
+                src: ['test/unit-test/**/*.js']
             }
         },
 
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         clean: {
             dist: ['./browser/dist/**/*'],
             tests: ['./browser/test/browserified_tests.js'],
-            coverage:['./browser/coverage/**/*']
+            coverage:['./coverage/**/*']
         },
 
         // browserify everything
@@ -136,6 +136,17 @@ module.exports = function (grunt) {
         'jshint',
         'mochaTest',
         'clean',
+        'browserify',
+        'uglify',
+        'connect:server',
+        'mocha_phantomjs'
+    ]);
+    grunt.registerTask('cleanup', [
+        'clean',
+    ]);
+    grunt.registerTask('bbt', [
+        'jshint',
+        'mochaTest',
         'browserify',
         'uglify',
         'connect:server',

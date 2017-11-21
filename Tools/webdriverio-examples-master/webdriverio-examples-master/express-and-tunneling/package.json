@@ -1,0 +1,23 @@
+{
+  "name": "webdriverio-example-express-and-tunneling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "npm run test-local && npm run test-cloud",
+    "test-cloud": "wdio test/wdio.conf.cloud.js",
+    "test-local": "wdio test/wdio.conf.local.js"
+  },
+  "author": "Tsutomu Kawamura",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "wdio-mocha-framework": "^0.5.11",
+    "wdio-phantomjs-service": "^0.2.2",
+    "wdio-spec-reporter": "^0.1.2",
+    "wdio-testingbot-service": "^0.1.7",
+    "webdriverio": "^4.9.9"
+  }
+}

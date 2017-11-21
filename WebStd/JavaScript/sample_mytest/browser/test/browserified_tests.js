@@ -48,11 +48,11 @@ module.exports = {
 };
 
 },{}],4:[function(require,module,exports){
-require('../../test/one.test.js');
-require('../../test/sqrt.test.js');
-require('../../test/two.test.js');
+require('../../test/unit-test/one.test.js');
+require('../../test/unit-test/sqrt.test.js');
+require('../../test/unit-test/two.test.js');
 
-},{"../../test/one.test.js":108,"../../test/sqrt.test.js":109,"../../test/two.test.js":110}],5:[function(require,module,exports){
+},{"../../test/unit-test/one.test.js":108,"../../test/unit-test/sqrt.test.js":109,"../../test/unit-test/two.test.js":110}],5:[function(require,module,exports){
 "use strict";
 var util = require('util');
 
@@ -14138,7 +14138,7 @@ fakeServerWithClock.restore = function restore() {
 
 module.exports = fakeServerWithClock;
 
-},{"./index":56,"lolex":60}],55:[function(require,module,exports){
+},{"./index":56,"lolex":61}],55:[function(require,module,exports){
 "use strict";
 
 var formatio = require("formatio");
@@ -14448,7 +14448,7 @@ var fakeServer = {
 
 module.exports = fakeServer;
 
-},{"../configure-logger":48,"../fake-xhr":58,"./format":55,"path-to-regexp":61}],57:[function(require,module,exports){
+},{"../configure-logger":48,"../fake-xhr":58,"./format":55,"path-to-regexp":62}],57:[function(require,module,exports){
 /*global Blob */
 "use strict";
 
@@ -15184,6 +15184,11 @@ module.exports = {
 };
 
 },{"./fake-server":56,"./fake-server/fake-server-with-clock":54,"./fake-xhr":58}],60:[function(require,module,exports){
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+},{}],61:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -15843,7 +15848,7 @@ exports.install = function install(target, now, toFake, loopLimit) {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 var isarray = require('isarray')
 
 /**
@@ -16271,12 +16276,7 @@ function pathToRegexp (path, keys, options) {
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
 
-},{"isarray":62}],62:[function(require,module,exports){
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-},{}],63:[function(require,module,exports){
+},{"isarray":60}],63:[function(require,module,exports){
 'use strict';
 
 /* !
@@ -24738,7 +24738,7 @@ module.exports = My;
 },{}],108:[function(require,module,exports){
 "use strict";
 
-var myModule = require('../src/mymodule');
+var myModule = require('../../src/mymodule');
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -24773,12 +24773,12 @@ describe('My browserified tests', function() {
   });
 });
 
-},{"../src/mymodule":106,"chai":8,"sinon":67,"sinon-chai":66}],109:[function(require,module,exports){
+},{"../../src/mymodule":106,"chai":8,"sinon":67,"sinon-chai":66}],109:[function(require,module,exports){
 "use strict";
 
 var chai = require('chai');
 var expect = chai.expect;
-var My = require('../src/sqrt.js');
+var My = require('../../src/sqrt.js');
 
 describe("sqrt", function() {
 
@@ -24792,11 +24792,11 @@ describe("sqrt", function() {
 
 });
 
-},{"../src/sqrt.js":107,"chai":8}],110:[function(require,module,exports){
+},{"../../src/sqrt.js":107,"chai":8}],110:[function(require,module,exports){
 (function (process){
 "use strict";
 
-var myModule = require('../src/mymodule');
+var myModule = require('../../src/mymodule');
 
 var chai = require('chai');
 var expect = chai.expect;
@@ -24839,4 +24839,4 @@ describe('Just another test', function() {
 });
 
 }).call(this,require('_process'))
-},{"../src/mymodule":106,"_process":64,"chai":8}]},{},[4]);
+},{"../../src/mymodule":106,"_process":64,"chai":8}]},{},[4]);

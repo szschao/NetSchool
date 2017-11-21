@@ -1,0 +1,19 @@
+{
+  "name": "webdriverio-example-wdio-wo-local-selenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "wdio test/wdio.conf.js"
+  },
+  "author": "Tsutomu Kawamura",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "wdio-mocha-framework": "^0.5.11",
+    "wdio-phantomjs-service": "^0.2.2",
+    "wdio-spec-reporter": "^0.1.2",
+    "webdriverio": "^4.9.8"
+  }
+}
