@@ -1,21 +1,22 @@
-{
-    setUp: function () {
+describe('301 - show how to fake time', function () {
+
+    before(function () {
         this.server = sinon.fakeServer.create();
-    },
+    });
 
-    tearDown: function () {
+    after(function () {
         this.server.restore();
-    },
+    });
 
-    "test should fetch comments from server" : function () {
-    this.server.respondWith("GET", "/some/article/comments.json",
-        [200, { "Content-Type": "application/json" },
-            '[{ "id": 12, "comment": "Hey there" }]']);
+    it("test should fetch comments from server", function () {
+        this.server.respondWith("GET", "/some/article/comments.json",
+            [200, {"Content-Type": "application/json"},
+                '[{ "id": 12, "comment": "Hey there" }]']);
 
-    var callback = sinon.spy();
-    myLib.getCommentsFor("/some/article", callback);
-    this.server.respond();
+        var callback = sinon.spy();
+        myLib.getCommentsFor("/some/article", callback);
+        this.server.respond();
 
-    sinon.assert.calledWith(callback, [{ id: 12, comment: "Hey there" }]);
-}
-}
+        sinon.assert.calledWith(callback, [{id: 12, comment: "Hey there"}]);
+    })
+});

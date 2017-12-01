@@ -2,6 +2,7 @@
  * Created by sunchao on 2017/08/30.
  */
 
+// if want to run this test,you must use config in 'mocha.opts.skip'
 describe.only('delayed root suite', function() {
     setTimeout(function () {
         // do some setup

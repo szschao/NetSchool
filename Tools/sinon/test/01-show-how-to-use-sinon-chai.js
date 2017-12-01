@@ -2,8 +2,17 @@
 const chai = require("chai");
 const sinon = require("sinon");
 const sinonChai = require("sinon-chai");
+const PubSub = require("pubsub-js");
 const expect = chai.expect;
 chai.use(sinonChai);
+
+//JQUERY USAGE SAMPLE
+const jsdom = require("jsdom");
+const {JSDOM} = jsdom;
+
+const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
+const window = dom.window;
+const $ = require('jquery')(window);
 
 describe('001 - show how to use spies', function () {
     const say = require("../src/hello");
@@ -19,32 +28,28 @@ describe('001 - show how to use spies', function () {
         expect(spy.getCall(0).args[0]).to.have.string("foo");
     });
 
-    it("should call method once with each argument", function () {
-        const object = {
-            method: function () {
-            }
-        };
-        const spy = sinon.spy(object, "method");
-        spy.withArgs(42);
-        spy.withArgs(1);
+    context("spy.withArgs(arg1[, arg2, ...]);", function () {
+        it("should call method once with each argument", function () {
+            const object = {
+                method: function () {
+                }
+            };
+            const spy = sinon.spy(object, "method");
+            spy.withArgs(42);
+            spy.withArgs(1);
 
-        object.method(42);
-        object.method(1);
+            object.method(42);
+            object.method(1);
 
-        expect(spy.withArgs(42)).to.have.been.calledOnce;
-        expect(spy.withArgs(1)).to.have.been.calledOnce;
+            expect(spy.withArgs(42)).to.have.been.calledOnce;
+            expect(spy.withArgs(1)).to.have.been.calledOnce;
+        });
     })
 
 });
 
 describe('002 - spy on existing functions', function () {
 
-    const jsdom = require("jsdom");
-    const {JSDOM} = jsdom;
-
-    const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-    const window = dom.window;
-    const $ = require('jquery')(window);
 
     before(function () {
         sinon.spy($, "ajax");
@@ -82,7 +87,7 @@ describe('101 - show how to use stubs', function () {
     });
 
 
-    context.only("stub.withArgs(arg1[, arg2, ...]);", function () {
+    context("stub.withArgs(arg1[, arg2, ...]);", function () {
         it("test should stub method differently based on arguments", function () {
             const stub = sinon.stub();
             stub.withArgs(1).throws("TypeError");
@@ -137,20 +142,44 @@ describe('201 - show how to use mock', function () {
     const say = require("../src/hello");
 
     it("test should call all subscribers when exceptions", function () {
-        var myAPI = {
+        const myAPI = {
             method: function () {
             }
         };
 
-        var spy = sinon.spy();
-        var mock = sinon.mock(myAPI);
+        const spy = sinon.spy();
+        const mock = sinon.mock(myAPI);
         mock.expects("method").once().throws();
 
-        //say.hello("foo",myAPI.method());
-        say.hello("foo", spy);
-        //say.hello("foo",undefined);
+        PubSub.subscribe("message", myAPI.method);
+        PubSub.subscribe("message", spy);
+        PubSub.publishSync("message", undefined);
 
-        //mock.verify();
+        mock.verify();
         expect(spy).to.have.been.called;
     })
 });
+
+describe('301 - show how to fake time', function () {
+
+    before(function () {
+        this.clock = sinon.useFakeTimers();
+    });
+
+    after(function () {
+        this.clock.restore();
+    });
+
+    it("test should animate element over 500ms", function () {
+
+        const el = $("<div></div>");
+        el.appendTo(dom.body);
+
+        el.animate({height: "200px", width: "200px"});
+        this.clock.tick(510);
+
+        expect(el.css("height")).to.have.string("px");
+        expect(el.css("width")).to.have.string("px");
+    })
+});
+
