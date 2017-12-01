@@ -1,0 +1,17 @@
+/**
+ * Created by sunchao on 2017/08/30.
+ */
+
+describe('Array', function() {
+    describe('#indexOf()', function() {
+        it.only('should return -1 unless present', function() {
+            console.log('individual test 1-1');
+            // ...
+        });
+
+        it('should return the index when present', function() {
+            console.log('individual test 1-2');
+            // ...
+        });
+    });
+});

@@ -2,6 +2,6 @@
 --bail
 --require chai
 --slow 200
---timeout 500
+--timeout 1000
 --check-leaks
 --recursive
