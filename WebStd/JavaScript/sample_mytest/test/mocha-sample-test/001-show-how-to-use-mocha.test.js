@@ -27,6 +27,7 @@ describe('003 - asynchronous code', function () {
             request
                 .get('https://api.github.com', function (err, res, body) {
                     expect(res).to.be.an('object');
+                    expect(body).to.not.be.an('object');
                     done();
                 });
         });
@@ -83,13 +84,13 @@ describe('004 - hooks', function () {
         // test cases
         describe('test hooks gropu 1:', function () {
             it('test hooks 1-1');
-        })
+        });
         describe('test hooks gropu 2:', function () {
             it('should return -1 when the value is not present', function () {
                 expect([1, 2, 3].indexOf(5)).to.equal(-1);
                 expect([1, 2, 3].indexOf(0)).to.equal(-1);
             });
-        })
+        });
     });
 });
 
@@ -166,7 +167,7 @@ describe('007 - inclusive tests', function () {
         });
         describe('    test hooks gropu 2:', function () {
             it('test hooks 1-2');
-        })
+        });
     });
 });
 
@@ -177,6 +178,7 @@ describe.skip('008 - retry test', function () {
     // where resources cannot be easily mocked/stubbed.
     // It’s not recommended to use this feature for unit tests.
 
+    var expect = require('chai').expect;
 
     // Retry all tests in this suite up to 4 times
     this.retries(4);

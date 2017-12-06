@@ -1,7 +1,7 @@
 "use strict";
 
 var expect = require('chai').expect;
-var Person = require('../../src/person');
+var Person = require('../../src/unit-src/person');
 
 describe('测试Person',function () {
 

@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/unit-test/**/*.js','test/mocha-sample-test/**/*.js']
+                src: ['test/unit-test/**/*.js','test/mocha-sample-test/**/*.js','test/chai-sample-test/**/*.js']
             }
         },
 

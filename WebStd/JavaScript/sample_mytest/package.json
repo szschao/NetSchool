@@ -5,7 +5,7 @@
   "description": "example project template for a cross platform (node and browser) javascript module",
   "scripts": {
     "clean":"grunt cleanup",
-    "wbt": "istanbul cover ./node_modules/mocha/bin/_mocha -- ./test/unit-test/**/*.test.js -R spec --colors --bail --require chai --slow 200 --timeout 500 --check-leaks --recursive",
+    "wbt": "istanbul cover ./node_modules/mocha/bin/_mocha -- ./test/unit-test/**/*.test.js ./test/mocha-sample-test/**/*.test.js ./test/chai-sample-test/**/*.test.js -R spec --colors --bail --require chai --slow 200 --timeout 2000 --check-leaks --recursive",
     "bbt": "grunt bbt",
     "sit": "wdio test/wdio.conf.local.js",
     "test": "grunt cleanup && npm run wbt && npm run bbt && npm run sit"

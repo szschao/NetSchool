@@ -2,9 +2,9 @@
 
 var minimatch = require('minimatch');
 
-var helper = require('../lib/helper');
-var echo = require('../lib/echo');
-var optional = require('../lib/optional');
+var helper = require('../../lib/helper');
+var echo = require('../../lib/echo');
+var optional = require('../../lib/optional');
 
 module.exports = {
 

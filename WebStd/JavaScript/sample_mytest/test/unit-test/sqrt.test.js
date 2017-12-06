@@ -2,7 +2,7 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var My = require('../../src/sqrt.js');
+var My = require('../../src/unit-src/sqrt.js');
 
 describe("sqrt", function() {
 

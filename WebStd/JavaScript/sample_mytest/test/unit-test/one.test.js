@@ -1,6 +1,6 @@
 "use strict";
 
-var myModule = require('../../src/mymodule');
+var myModule = require('../../src/unit-src/mymodule');
 
 var chai = require('chai');
 var expect = chai.expect;
