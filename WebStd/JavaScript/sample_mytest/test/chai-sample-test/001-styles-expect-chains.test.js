@@ -70,6 +70,7 @@ describe('chai expect', function () {
 
     it('.nested - Enables dot- and bracket-notation in all .property ' +
         'and .include assertions that follow in the chain.', function () {
+
         expect({a: {b: ['x', 'y']}}).to.have.nested.property('a.b[1]');
         expect({a: {b: ['x', 'y']}}).to.nested.include({'a.b[1]': 'y'});
 
@@ -88,10 +89,12 @@ describe('chai expect', function () {
         expect(deepObj).to.have.nested.property('teas[2].tea', 'konacha');
 
         var arr = [
-            ['chai', 'matcha', 'konacha']
-            , [{tea: 'chai'}
-                , {tea: 'matcha'}
-                , {tea: 'konacha'}]
+            ['chai', 'matcha', 'konacha'],
+            [
+                {tea: 'chai'},
+                {tea: 'matcha'},
+                {tea: 'konacha'}
+            ]
         ];
         expect(arr).to.have.nested.property('[0][1]', 'matcha');
         expect(arr).to.have.nested.property('[1][2].tea', 'konacha');
@@ -173,7 +176,9 @@ describe('chai expect', function () {
         expect({x: {a: 1}}).to.deep.include({x: {a: 1}});
         expect({x: {a: 1}}).to.not.include({x: {a: 1}});
 
+        /* jshint ignore:start */
         Object.prototype.b = 2;
+        /* jshint ignore:start */
         expect({a: 1}).to.own.include({a: 1});
         expect({a: 1}).to.include({b: 2}).but.not.own.include({b: 2});
 
@@ -311,7 +316,8 @@ describe('chai expect', function () {
         test();
     });
 
-    it('.equal(value,[msg]) - Asserts that the target is strictly equal (===) to value.', function () {
+    it('.equal(value,[msg]) ' +
+        '- Asserts that the target is strictly equal (===) to value.', function () {
         expect('hello').to.equal('hello');
         expect(42).to.equal(42);
         expect(1).to.not.equal(true);
@@ -368,7 +374,11 @@ describe('chai expect', function () {
         expect([1, 2]).to.be.an.instanceof(Array);
     });
 
-    it('.property(name,[value[,msg]])Asserts that the target has a property name, optionally asserting that the value of that property is strictly equal to value. ', function () {
+    it('.property(name,[value[,msg]]) ' +
+        'Asserts that the target has a property name,' +
+        'optionally asserting that the value of ' +
+        'that property is strictly equal to value. ', function () {
+
         // simple referencing
         var obj = {foo: 'bar'};
         expect(obj).to.have.property('foo');
@@ -378,10 +388,12 @@ describe('chai expect', function () {
         expect({x: {a: 1}}).to.have.deep.property('x', {a: 1});
         expect({x: {a: 1}}).to.not.have.property('x', {a: 1});
 
+        /* jshint ignore:start */
         Object.prototype.b = 2;
         expect({a: 1}).to.have.own.property('a');
         expect({a: 1}).to.have.own.property('a', 1);
         expect({a: 1}).to.have.property('b').but.not.own.property('b');
+        /* jshint ignore:end */
 
         expect({x: {a: 1}}).to.have.deep.own.property('x', {a: 1});
 
@@ -404,6 +416,7 @@ describe('chai expect', function () {
     it('.own - Causes all .property and .include assertions that follow ' +
         'in the chain to ignore inherited properties.', function () {
 
+        /* jshint ignore:start */
         Object.prototype.b = 2;
 
         expect({a: 1}).to.have.own.property('a');
@@ -411,6 +424,7 @@ describe('chai expect', function () {
 
         expect({a: 1}).to.own.include({a: 1});
         expect({a: 1}).to.include({b: 2}).but.not.own.include({b: 2});
+        /* jshint ignore:end */
     });
 
     it('.ownProperty(name) - Asserts that the target has an own property name.', function () {

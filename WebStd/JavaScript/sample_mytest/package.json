@@ -4,7 +4,7 @@
   "author": "sunchao",
   "description": "example project template for a cross platform (node and browser) javascript module",
   "scripts": {
-    "clean":"grunt cleanup",
+    "clean": "grunt cleanup",
     "wbt": "istanbul cover ./node_modules/mocha/bin/_mocha -- ./test/unit-test/**/*.test.js ./test/mocha-sample-test/**/*.test.js ./test/chai-sample-test/**/*.test.js -R spec --colors --bail --require chai --slow 200 --timeout 2000 --check-leaks --recursive",
     "bbt": "grunt bbt",
     "sit": "wdio test/wdio.conf.local.js",
@@ -12,7 +12,8 @@
   },
   "main": "mymodule",
   "dependencies": {
-    "minimatch": "~3.0.4"
+    "minimatch": "~3.0.4",
+    "reinstall": "^2.0.0"
   },
   "devDependencies": {
     "browserify": "~14.5.0",
@@ -36,7 +37,10 @@
     "wdio-phantomjs-service": "^0.2.2",
     "wdio-spec-reporter": "^0.1.2",
     "wdio-testingbot-service": "^0.1.7",
-    "webdriverio": "^4.9.9"
+    "webdriverio": "^4.9.9",
+    "jquery": "~3.2.1",
+    "jsdom": "~11.5.1",
+    "pubsub-js": "~1.5.7"
   },
   "browser": {
     "./lib/echo.js": "./browser/lib/shim/echo.js",
