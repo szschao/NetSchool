@@ -146,10 +146,10 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('bbt', [
         'jshint',
-        'mochaTest',
         'browserify',
         'uglify',
         'connect:server',
+        'mochaTest',
         'mocha_phantomjs'
     ]);
 };
