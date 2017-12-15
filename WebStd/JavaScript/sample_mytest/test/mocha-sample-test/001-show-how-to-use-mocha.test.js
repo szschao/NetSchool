@@ -171,29 +171,6 @@ describe('007 - inclusive tests', function () {
     });
 });
 
-describe.skip('008 - retry test', function () {
-    // This test should be run with selenium webdriver
-
-    // This feature is designed to handle end-to-end tests (functional tests/Selenium…)
-    // where resources cannot be easily mocked/stubbed.
-    // It’s not recommended to use this feature for unit tests.
-
-    var expect = require('chai').expect;
-
-    // Retry all tests in this suite up to 4 times
-    this.retries(4);
-
-    beforeEach(function () {
-        browser.get('http://www.yahoo.com');
-    });
-
-    it('should succeed on the 3rd try', function () {
-        // Specify this test to only retry up to 2 times
-        this.retries(2);
-        expect($('.foo').isDisplayed()).to.eventually.be.true;
-    });
-});
-
 describe('010 - dynamically generating test sample - add()', function () {
     var assert = require('chai').assert;
 

@@ -7,6 +7,15 @@ const expect = chai.expect;
 chai.use(sinonChai);
 
 
+//JQUERY USAGE SAMPLE
+const jsdom = require("jsdom");
+const {JSDOM} = jsdom;
+const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
+/* jshint ignore:start */
+const window = dom.window;
+const $ = require('jquery')(window);
+/* jshint ignore:end */
+
 describe('001 - show how to use spies', function () {
     const say = require("../src/hello");
 
@@ -41,16 +50,6 @@ describe('001 - show how to use spies', function () {
 });
 
 describe('002 - spy on existing functions', function () {
-
-    //JQUERY USAGE SAMPLE
-    /* jshint ignore:start */
-    const jsdom = require("jsdom");
-    const {JSDOM} = jsdom;
-
-    const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-    const window = dom.window;
-    const $ = require('jquery')(window);
-    /* jshint ignore:end */
 
     before(function () {
         sinon.spy($, "ajax");
@@ -163,16 +162,6 @@ describe('201 - show how to use mock', function () {
 });
 
 describe('301 - show how to fake time', function () {
-
-    //JQUERY USAGE SAMPLE
-    const jsdom = require("jsdom");
-    const {JSDOM} = jsdom;
-
-    const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-    /* jshint ignore:start */
-    const window = dom.window;
-    const $ = require('jquery')(window);
-    /* jshint ignore:end */
 
     before(function () {
         this.clock = sinon.useFakeTimers();

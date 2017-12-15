@@ -4,14 +4,14 @@ let expressServer;
 
 exports.config = {
   specs: [
-    './test/system-integration-test/**/*.js'
+    './test/acceptance-test/**/*.js'
   ],
   exclude: [],
   maxInstances: 2, // it depends on the plan of the cloud servvice
   sync: true,
   logLevel: 'error',
   coloredLogs: true,
-  baseUrl: 'http://localhost:3000/test/system-integration-test/html',
+  baseUrl: 'http://localhost:3000/test/acceptance-test/html/',
   waitforTimeout: 20000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,

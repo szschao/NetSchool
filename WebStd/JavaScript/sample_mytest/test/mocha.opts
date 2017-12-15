@@ -1,7 +1,8 @@
---colors
 --bail
---require chai
---slow 200
---timeout 1000
+--colors
 --check-leaks
 --recursive
+--reporter spec
+--require chai
+--slow 200
+--timeout 2000
