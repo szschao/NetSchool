@@ -12,6 +12,7 @@ module.exports = function (grunt) {
             files: [
                 '**/*.js',
                 '!Gruntfile.js',
+                '!test/wdio.conf.*.js',
                 '!coverage/**/*',
                 '!node_modules/**/*',
                 '!browser/example/lib/**/*',

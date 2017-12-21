@@ -8,9 +8,10 @@
     "coverage": "npm run coverage:unit&& npm run check:coverage",
     "coverage:unit": "istanbul cover --root ./src --dir ./coverage/unit ./node_modules/mocha/bin/_mocha -- --opts ./test/mocha.opts ./test/unit-test/**/*.test.js ./test/mocha-sample-test/**/*.test.js ./test/chai-sample-test/**/*.test.js",
     "check:coverage": "istanbul check-coverage  --root ./coverage --statements 90 --branches 90 --functions 90 --lines 90",
-    "test": "npm run clean && npm run coverage && npm run test:unit && npm run test:at",
+    "test": "npm run clean && npm run coverage && npm run test:unit && npm run test:it && npm run test:at",
     "test:unit": "grunt bbt",
-    "test:at": "wdio test/wdio.conf.local.js",
+    "test:it": "wdio test/wdio.conf.local.integration.js",
+    "test:at": "wdio test/wdio.conf.local.acceptance.js",
     "test:watch": "grunt watch"
   },
   "main": "mymodule",
