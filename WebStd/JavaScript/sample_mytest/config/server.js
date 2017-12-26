@@ -29,6 +29,7 @@ const server = {
         if (expressServer) {
             expressServer.close();
             expressServer = null;
+            process.exit(0);
             console.log('onComplete: Server stopped');
         }
     }

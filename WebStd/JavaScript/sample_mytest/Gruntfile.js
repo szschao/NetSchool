@@ -38,7 +38,8 @@ module.exports = function (grunt) {
         clean: {
             dist: ['./browser/dist/**/*'],
             tests: ['./browser/test/browserified_tests.js'],
-            coverage:['./coverage/**/*']
+            coverage:['./coverage/**/*'],
+            errorShot: ['./errorShots/**/*']
         },
 
         // browserify everything
