@@ -19,6 +19,7 @@ describe('002 - synchronous code', function () {
 });
 
 describe('003 - asynchronous code', function () {
+    this.timeout(5000);
     var expect = require('chai').expect;
     var request = require('request');
 
