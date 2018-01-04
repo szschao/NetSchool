@@ -20,46 +20,46 @@ describe('my first express example', function () {
 
     it('should have hello world', function () {
 
-        app.get('/',function (req,res) {
+        app.get('/', function (req, res) {
             res.send('Hello World');
         });
         const bodyText = browser
-            .url(EXPRESS_TEST_URL_BASE+'/')
+            .url(EXPRESS_TEST_URL_BASE + '/')
             .getText('body*=Hello');
         expect(bodyText).to.have.string('Hello World');
     });
 
     it('route methods - should request "/secret" ' +
-        'weather you are using GET,POST,PUT,DELETE,or any other HTTP request method',function () {
+        'weather you are using GET,POST,PUT,DELETE,or any other HTTP request method', function () {
 
-        app.all('/secret',function (req,res,next) {
+        app.all('/secret', function (req, res, next) {
             res.send('Hello World');
             next();
         });
 
         const bodyText = browser
-            .url(EXPRESS_TEST_URL_BASE+'/secret')
+            .url(EXPRESS_TEST_URL_BASE + '/secret')
             .getText('body*=Hello');
         expect(bodyText).to.have.string('Hello World');
     });
 
     it('should have hello express', function () {
 
-        app.delete('/',function (req, res) {
+        app.delete('/', function (req, res) {
             res.send('Delete request to homepage');
         });
 
-        app.get('/',function (req,res) {
+        app.get('/', function (req, res) {
             res.send('Hello Express');
         });
         const bodyText = browser
-            .url(EXPRESS_TEST_URL_BASE+'/')
+            .url(EXPRESS_TEST_URL_BASE + '/')
             .getText('body*=Hello');
         //expect(bodyText).to.have.string('Hello Express');
         expect(bodyText).to.have.string('Hello World');
     });
 
-    it('param will each be called only once in a request-response cycle',function () {
+    it('param will each be called only once in a request-response cycle', function () {
         app.param('id', function (req, res, next, id) {
             console.log('CALLED ONLY ONCE');
             next();
@@ -76,7 +76,34 @@ describe('my first express example', function () {
         });
 
         const bodyText = browser
-            .url(EXPRESS_TEST_URL_BASE+'/user/42');
-    })
+            .url(EXPRESS_TEST_URL_BASE + '/user/42');
+    });
+
+    it('The req object represents the HTTP request and ' +
+        'has properties for the request query string, ' +
+        'parameters, body, HTTP headers, and so on.', function () {
+
+        app.get('/user/:id', function (req, res) {
+            res.send('user ' + req.params.id);
+        });
+
+        const bodyText = browser
+            .url(EXPRESS_TEST_URL_BASE + '/user/32')
+            .getText('//BODY');
+        expect(bodyText).to.have.string('user 32');
+    });
+
+    it.only('actual name is determined by the parameters' +
+        ' to the callback function in which you’re working', function () {
+
+        app.get('/user/:id', function (request, response) {
+            response.send('user ' + request.params.id);
+        });
+
+        const bodyText = browser
+            .url(EXPRESS_TEST_URL_BASE + '/user/23')
+            .getText('//BODY');
+        expect(bodyText).to.have.string('user 23');
+    });
 });
 

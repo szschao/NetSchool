@@ -14,7 +14,8 @@ exports.config = Object.assign({}, base.config, {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/acceptance-test/**/*.js'
+        //'./test/acceptance-test/**/*.js'
+        './test/acceptance-test/js/web*.js'
     ],
     //
     // ============
