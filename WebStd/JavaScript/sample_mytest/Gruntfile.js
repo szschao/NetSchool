@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/unit-test/**/*.js','test/mocha-sample-test/**/*.js','test/chai-sample-test/**/*.js']
+                src: ['test/unit/**/*.js','test/mocha-sample/**/*.js','test/chai-sample/**/*.js']
             }
         },
 
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
             // usages in browser/example/index.html (script tag) and
             // browser/example/index-require.html (RequireJS).
             standalone: {
-                src: ['./src/unit-src/<%= pkg.name %>.js'],
+                src: ['./src/unit/<%= pkg.name %>.js'],
                 dest: './browser/dist/<%= pkg.name %>.standalone.js',
                 options: {
                     standalone: '<%= pkg.name %>'
@@ -61,10 +61,10 @@ module.exports = function (grunt) {
             // have been created with an --external parameter. See
             // browser/test/index.html for an example.
             require: {
-                src: ['./src/unit-src/<%= pkg.name %>.js'],
+                src: ['./src/unit/<%= pkg.name %>.js'],
                 dest: './browser/dist/<%= pkg.name %>.require.js',
                 options: {
-                    alias: ['./src/unit-src/<%= pkg.name %>.js:']
+                    alias: ['./src/unit/<%= pkg.name %>.js:']
                 }
             },
             // These are the browserified tests. We need to browserify the tests to be
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
                 src: ['browser/test/suite.js'],
                 dest: './browser/test/browserified_tests.js',
                 options: {
-                    external: ['./src/unit-src/<%= pkg.name %>.js.map'],
+                    external: ['./src/unit/<%= pkg.name %>.js.map'],
                     // Embed source map for tests
                     debug: true
                 }

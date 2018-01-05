@@ -10,8 +10,9 @@
     "check:coverage": "istanbul check-coverage  --root ./coverage --statements 90 --branches 90 --functions 90 --lines 90",
     "test": "npm run clean && npm run coverage && npm run test:unit && npm run test:it && npm run test:at",
     "test:unit": "grunt bbt",
-    "test:it": "wdio test/wdio.conf.local.integration.js",
-    "test:at": "wdio test/wdio.conf.local.acceptance.js",
+    "test:it": "wdio test/wdio.local.integration.conf.js",
+    "test:at": "wdio test/wdio.local.acceptance.conf.js",
+    "test:ft": "wdio test/wdio.local.features.conf.js",
     "test:watch": "grunt watch"
   },
   "main": "mymodule",
@@ -23,6 +24,8 @@
     "browserify": "~14.5.0",
     "chai": "~4.1.2",
     "chai-webdriverio": "~0.4.3",
+    "cucumber": "~3.2.1",
+    "express": "^4.16.2",
     "grunt": "~1.0.1",
     "grunt-browserify": "~5.2.0",
     "grunt-contrib-clean": "~1.1.0",
@@ -33,19 +36,19 @@
     "grunt-mocha-phantomjs": "~4.0.0",
     "grunt-mocha-test": "~0.13.3",
     "istanbul": "~0.4.5",
+    "jquery": "~3.2.1",
+    "jsdom": "~11.5.1",
+    "mocha": "~4.0.1",
+    "pubsub-js": "~1.5.7",
+    "request": "~2.83.0",
     "sinon": "~4.1.1",
     "sinon-chai": "~2.14.0",
-    "mocha": "~4.0.1",
+    "webdriverio": "^4.9.9",
+    "wdio-cucumber-framework": "~1.0.3",
     "wdio-mocha-framework": "^0.5.11",
     "wdio-phantomjs-service": "^0.2.2",
     "wdio-spec-reporter": "^0.1.2",
-    "wdio-testingbot-service": "^0.1.7",
-    "webdriverio": "^4.9.9",
-    "request": "~2.83.0",
-    "express": "^4.16.2",
-    "jquery": "~3.2.1",
-    "jsdom": "~11.5.1",
-    "pubsub-js": "~1.5.7"
+    "wdio-testingbot-service": "^0.1.7"
   },
   "browser": {
     "./lib/echo.js": "./browser/lib/shim/echo.js",
@@ -71,6 +74,6 @@
     "files": "test/unit-test/*.js"
   },
   "engines": {
-    "node": ">= 0.10.x"
+    "node": ">= 1.0.x"
   }
 }
