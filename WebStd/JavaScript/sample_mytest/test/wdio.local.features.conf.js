@@ -9,8 +9,8 @@ exports.config = Object.assign({}, base.config, {
     // Specify Test Files
     // ==================
     specs: [
-        //'./test/features/**/*.feature'
-        './test/features/example.feature'
+        './test/features/**/*.feature'
+        //'./test/features/example.feature'
     ],
     //
     // ===================
@@ -73,6 +73,22 @@ exports.config = Object.assign({}, base.config, {
     // =====
     // Hooks
     // =====
+    /**
+     * Gets executed before test execution begins. At this point you can access to all global
+     * variables like `browser`. It is the perfect place to define custom commands.
+     * @param {Array.<Object>} capabilities list of capabilities details
+     * @param {Array.<String>} specs List of spec file paths that are to be run
+     */
+    before: function before() {
+        /**
+         * Setup the Chai assertion framework
+         */
+        const chai = require('chai');
+
+        global.expect = chai.expect;
+        global.assert = chai.assert;
+        global.should = chai.should();
+    },
     /**
      * Runs before a Cucumber feature
      * @param {Object} feature feature details

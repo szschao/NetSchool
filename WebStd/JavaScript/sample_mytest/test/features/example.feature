@@ -5,6 +5,4 @@ Feature:
 
   Scenario: Check title of website after search
     Given I open the url "https://www.baidu.com"
-    When I set "WebdriverIO" to the inputfield "#kw"
-    And I press "Enter"
-    Then I expect that the title is "WebdriverIO_百度搜索"
+    Then I expect that the title is "百度一下，你就知道"
