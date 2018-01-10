@@ -61,7 +61,7 @@ describe('my first express example', function () {
 
     it('param will each be called only once in a request-response cycle', function () {
         app.param('id', function (req, res, next, id) {
-            console.log('CALLED ONLY ONCE');
+            console.log('CALLED ONLY ONCE(id:'+id+')');
             next();
         });
 
@@ -75,8 +75,7 @@ describe('my first express example', function () {
             res.end();
         });
 
-        const bodyText = browser
-            .url(EXPRESS_TEST_URL_BASE + '/user/42');
+        browser.url(EXPRESS_TEST_URL_BASE + '/user/42');
     });
 
     it('The req object represents the HTTP request and ' +

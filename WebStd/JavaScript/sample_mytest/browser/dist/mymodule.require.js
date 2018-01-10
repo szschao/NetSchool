@@ -62,7 +62,7 @@ exports.mult = function(a, b) {
 
 },{"util":3}],5:[function(require,module,exports){
 
-},{}],"c:\\wamp\\www\\NetSchool\\WebStd\\JavaScript\\sample_mytest\\src\\unit-src\\mymodule.js":[function(require,module,exports){
+},{}],"c:\\wamp\\www\\NetSchool\\WebStd\\JavaScript\\sample_mytest\\src\\unit\\mymodule.js":[function(require,module,exports){
 "use strict";
 
 var minimatch = require('minimatch');

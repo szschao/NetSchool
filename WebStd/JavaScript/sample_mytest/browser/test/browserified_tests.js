@@ -52,7 +52,7 @@ require('../../test/unit/one.test.js');
 require('../../test/unit/sqrt.test.js');
 require('../../test/unit/two.test.js');
 
-},{"../../test/unit-test/one.test.js":108,"../../test/unit-test/sqrt.test.js":109,"../../test/unit-test/two.test.js":110}],5:[function(require,module,exports){
+},{"../../test/unit/one.test.js":108,"../../test/unit/sqrt.test.js":109,"../../test/unit/two.test.js":110}],5:[function(require,module,exports){
 "use strict";
 var util = require('util');
 
@@ -24773,7 +24773,7 @@ describe('My browserified tests', function() {
   });
 });
 
-},{"../../src/unit-src/mymodule":106,"chai":8,"sinon":67,"sinon-chai":66}],109:[function(require,module,exports){
+},{"../../src/unit/mymodule":106,"chai":8,"sinon":67,"sinon-chai":66}],109:[function(require,module,exports){
 "use strict";
 
 var chai = require('chai');
@@ -24792,7 +24792,7 @@ describe("sqrt", function() {
 
 });
 
-},{"../../src/unit-src/sqrt.js":107,"chai":8}],110:[function(require,module,exports){
+},{"../../src/unit/sqrt.js":107,"chai":8}],110:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -24839,4 +24839,4 @@ describe('Just another test', function() {
 });
 
 }).call(this,require('_process'))
-},{"../../src/unit-src/mymodule":106,"_process":64,"chai":8}]},{},[4]);
+},{"../../src/unit/mymodule":106,"_process":64,"chai":8}]},{},[4]);

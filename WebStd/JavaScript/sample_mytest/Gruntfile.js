@@ -11,13 +11,15 @@ module.exports = function (grunt) {
         jshint: {
             files: [
                 '**/*.js',
-                '!Gruntfile.js',
-                '!test/wdio.conf.*.js',
-                '!coverage/**/*',
-                '!node_modules/**/*',
-                '!browser/example/lib/**/*',
                 '!browser/dist/**/*',
-                '!browser/test/browserified_tests.js'
+                '!browser/example/lib/**/*',
+                '!browser/test/browserified_tests.js',
+                '!coverage/**/*',
+                '!errorShots/**/*',
+                '!node_modules/**/*',
+                '!Gruntfile.js',
+                '!test/wdio.*.conf.js',
+                '!test/features/**/*'
             ],
             options: {
                 jshintrc: '.jshintrc'
@@ -30,7 +32,11 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/unit/**/*.js','test/mocha-sample/**/*.js','test/chai-sample/**/*.js']
+                src: [
+                    'test/unit/**/*.js',
+                    'test/mocha-sample/**/*.js',
+                    'test/chai-sample/**/*.js'
+                ]
             }
         },
 
@@ -145,6 +151,9 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('cleanup', [
         'clean',
+    ]);
+    grunt.registerTask('validate', [
+        'jshint',
     ]);
     grunt.registerTask('bbt', [
         'jshint',
