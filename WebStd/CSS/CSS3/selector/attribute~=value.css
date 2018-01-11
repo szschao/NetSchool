@@ -1,5 +1,0 @@
-/*选择 title 属性包含单词 "flower" 的所有元素(单词以空白隔开)*/
-[title~=flower]
-{
-    background-color:antiquewhite;
-}

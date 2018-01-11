@@ -1,5 +1,0 @@
-/*选择属于其父元素的首个 <p> 元素。*/
-p:first-of-type
-{
-    background:firebrick;
-}

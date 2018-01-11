@@ -1,5 +1,0 @@
-/*选择 target="_blank" 的所有元素*/
-a[target=_blank]
-{
-    background-color:lightblue;
-}

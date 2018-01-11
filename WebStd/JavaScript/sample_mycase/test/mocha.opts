@@ -1,7 +1,0 @@
---colors
---bail
---require chai
---slow 200
---timeout 500
---check-leaks
---recursive

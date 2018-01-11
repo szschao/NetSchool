@@ -1,6 +1,0 @@
-describe('010 - exclusive suite tests', function() {
-    describe.only('#indexOf()', function() {
-        // ...
-        console.log('    The exclusivity feature allows you to run only the specified suite');
-    });
-});
