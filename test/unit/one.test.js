@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var myModule = require('../../src/unit/mymodule');
 
@@ -17,7 +17,7 @@ describe('My browserified tests', function() {
   });
 
   it('should be able to use my module', function() {
-    if (myModule.add(1, 1) !==  2) {
+    if (myModule.add(1, 1) !== 2) {
       throw new Error('Whoa. 1 + 1 is not 2?');
     }
   });
