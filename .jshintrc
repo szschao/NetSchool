@@ -14,7 +14,8 @@
     "describe": true,
     "it": true,
     "mocha": true,
-    "browser": true
+    "browser": true,
+    "When": true
   },
   "immed": true,
   "indent": 2,
@@ -33,7 +34,7 @@
   "undef": true,
   "unused": true,
   "varstmt": false,
-  "asi": false,
+  "asi": true,
   "boss": true,
   "eqnull": true,
   "evil": true,
