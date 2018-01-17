@@ -17,7 +17,7 @@
     "test:it": "wdio test/wdio.local.integration.conf.js",
     "test:at": "wdio test/wdio.local.acceptance.conf.js",
     "test:ft": "wdio test/wdio.local.features.conf.js",
-    "test:watch": "grunt watch"
+    "watch": "run-p watch:*"
   },
   "main": "mymodule",
   "dependencies": {
