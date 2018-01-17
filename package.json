@@ -8,7 +8,7 @@
     "lint": "run-s lint:*",
     "lint:js": "grunt validate",
     "lint:style": "stylelint \"./src/**/*.css\" && stylelint \"./src/**/*.s?(a|c)ss\" --syntax scss",
-    "lint:html": "htmlhint ./src/**/*.html",
+    "lint:html": "htmlhint ./src/**/*.html ./lib/**/*.html",
     "coverage": "npm-run-all coverage:unit check:coverage",
     "coverage:unit": "istanbul cover --root ./src --dir ./coverage/unit ./node_modules/mocha/bin/_mocha -- --opts ./test/mocha.opts ./test/unit/**/*.test.js",
     "check:coverage": "istanbul check-coverage  --root ./coverage --statements 90 --branches 90 --functions 90 --lines 90",
