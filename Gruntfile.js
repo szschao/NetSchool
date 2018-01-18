@@ -40,14 +40,6 @@ module.exports = function (grunt) {
       },
     },
 
-    // remove all previous browserified builds
-    clean: {
-      dist: ['./browser/dist/**/*'],
-      tests: ['./browser/test/browserified_tests.js'],
-      coverage: ['./coverage/**/*'],
-      errorShot: ['./errorShots/**/*'],
-    },
-
     // browserify everything
     browserify: {
       // This browserify build be used by users of the module. It contains a
@@ -131,7 +123,6 @@ module.exports = function (grunt) {
     },
   });
 
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -143,14 +134,10 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'jshint',
     'mochaTest',
-    'clean',
     'browserify',
     'uglify',
     'connect:server',
     'mocha_phantomjs',
-  ]);
-  grunt.registerTask('cleanup', [
-    'clean',
   ]);
   grunt.registerTask('validate', [
     'jshint',
