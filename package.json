@@ -9,15 +9,16 @@
     "coverage-unit": "istanbul cover --root ./src --dir ./coverage/unit ./node_modules/mocha/bin/_mocha -- --opts ./test/mocha.opts ./test/unit/**/*.test.js",
     "coverage-check": "istanbul check-coverage  --root ./coverage --statements 90 --branches 90 --functions 90 --lines 90",
     "lint": "run-s lint-*",
-    "lint-js": "jshint lib/ src/ test/",
+    "lint-js": "jshint .",
     "lint-style": "stylelint \"./src/**/*.css\" && stylelint \"./src/**/*.s?(a|c)ss\" --syntax scss",
     "lint-html": "htmlhint ./src/**/*.html ./lib/**/*.html",
     "test": "npm-run-all clean coverage test-unit test-it test-at test-ft",
-    "test-unit": "grunt bbt",
+    "test-unit": "mocha --opts ./test/mocha.opts ./test/unit/**/*.test.js test/mocha-sample/**/*.js test/chai-sample/**/*.js",
     "test-it": "wdio test/wdio.local.integration.conf.js",
     "test-at": "wdio test/wdio.local.acceptance.conf.js",
     "test-ft": "wdio test/wdio.local.features.conf.js",
-    "watch": "run-p watch-*"
+    "watch": "run-p watch-*",
+    "watch-unit": "npm run test-unit -- --watch"
   },
   "main": "mymodule",
   "dependencies": {

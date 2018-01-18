@@ -1,2 +1,9 @@
+browser/dist/**/*
+browser/example/lib/**/*
+browser/test/browserified_tests.js
+coverage/**/*
+errorShots/**/*
+node_modules/**/*
+Gruntfile.js
 test/wdio.*.conf.js
 test/features/**/*

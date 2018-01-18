@@ -24,11 +24,10 @@ var expect = require('chai').expect;
 describe('chai expect', function () {
 
   it('.not - Negates any of assertions following in the chain.', function () {
-    expect(function () {
-    }).to.not.throw(Error);
+    expect(function () { }).to.not.throw(Error);
     expect(foo).to.not.be.equal('bar');
     expect({foo: 'baz'}).to.have.property('foo').and.not.equal('bar');
-    expect({a: 1}).to.not.have.property('b');
+    //expect({a: 1}).to.not.have.property('b');
     expect([1, 2]).to.be.an('array').that.does.not.include(3);
 
     // 慎用 not 断言一个预期的,比没有预期的否定要好

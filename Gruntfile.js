@@ -8,20 +8,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // run the mocha tests via Node.js
-    mochaTest: {
-      test: {
-        options: {
-          reporter: 'spec',
-        },
-        src: [
-          'test/unit/**/*.js',
-          'test/mocha-sample/**/*.js',
-          'test/chai-sample/**/*.js',
-        ],
-      },
-    },
-
     // browserify everything
     browserify: {
       // This browserify build be used by users of the module. It contains a
@@ -103,12 +89,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
   grunt.registerTask('default', [
-    'mochaTest',
     'browserify',
     'uglify',
     'connect:server',
@@ -118,7 +102,6 @@ module.exports = function (grunt) {
     'browserify',
     'uglify',
     'connect:server',
-    'mochaTest',
     'mocha_phantomjs',
   ]);
 };
