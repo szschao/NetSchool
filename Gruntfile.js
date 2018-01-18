@@ -8,24 +8,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    jshint: {
-      files: [
-        '**/*.js',
-        '!browser/dist/**/*',
-        '!browser/example/lib/**/*',
-        '!browser/test/browserified_tests.js',
-        '!coverage/**/*',
-        '!errorShots/**/*',
-        '!node_modules/**/*',
-        '!Gruntfile.js',
-        '!test/wdio.*.conf.js',
-        '!test/features/**/*',
-      ],
-      options: {
-        jshintrc: '.jshintrc',
-      },
-    },
-
     // run the mocha tests via Node.js
     mochaTest: {
       test: {
@@ -116,34 +98,23 @@ module.exports = function (grunt) {
         },
       },
     },
-
-    watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['default'],
-    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
   grunt.registerTask('default', [
-    'jshint',
     'mochaTest',
     'browserify',
     'uglify',
     'connect:server',
     'mocha_phantomjs',
   ]);
-  grunt.registerTask('validate', [
-    'jshint',
-  ]);
-  grunt.registerTask('bbt', [
-    'jshint',
+ grunt.registerTask('bbt', [
     'browserify',
     'uglify',
     'connect:server',

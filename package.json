@@ -5,19 +5,19 @@
   "description": "example project template for a cross platform (node and browser) javascript module",
   "scripts": {
     "clean": "rimraf ./browser/dist/**/* ./browser/test/browserified_tests.js ./coverage/**/* ./errorShots/**/*",
-    "lint": "run-s lint:*",
-    "lint:js": "grunt validate",
-    "lint:style": "stylelint \"./src/**/*.css\" && stylelint \"./src/**/*.s?(a|c)ss\" --syntax scss",
-    "lint:html": "htmlhint ./src/**/*.html ./lib/**/*.html",
-    "coverage": "npm-run-all coverage:unit coverage:check",
-    "coverage:unit": "istanbul cover --root ./src --dir ./coverage/unit ./node_modules/mocha/bin/_mocha -- --opts ./test/mocha.opts ./test/unit/**/*.test.js",
-    "coverage:check": "istanbul check-coverage  --root ./coverage --statements 90 --branches 90 --functions 90 --lines 90",
-    "test": "npm-run-all clean coverage test:unit test:it test:at test:ft",
-    "test:unit": "grunt bbt",
-    "test:it": "wdio test/wdio.local.integration.conf.js",
-    "test:at": "wdio test/wdio.local.acceptance.conf.js",
-    "test:ft": "wdio test/wdio.local.features.conf.js",
-    "watch": "run-p watch:*"
+    "coverage": "npm-run-all coverage-unit coverage-check",
+    "coverage-unit": "istanbul cover --root ./src --dir ./coverage/unit ./node_modules/mocha/bin/_mocha -- --opts ./test/mocha.opts ./test/unit/**/*.test.js",
+    "coverage-check": "istanbul check-coverage  --root ./coverage --statements 90 --branches 90 --functions 90 --lines 90",
+    "lint": "run-s lint-*",
+    "lint-js": "jshint lib/ src/ test/",
+    "lint-style": "stylelint \"./src/**/*.css\" && stylelint \"./src/**/*.s?(a|c)ss\" --syntax scss",
+    "lint-html": "htmlhint ./src/**/*.html ./lib/**/*.html",
+    "test": "npm-run-all clean coverage test-unit test-it test-at test-ft",
+    "test-unit": "grunt bbt",
+    "test-it": "wdio test/wdio.local.integration.conf.js",
+    "test-at": "wdio test/wdio.local.acceptance.conf.js",
+    "test-ft": "wdio test/wdio.local.features.conf.js",
+    "watch": "run-p watch-*"
   },
   "main": "mymodule",
   "dependencies": {
@@ -66,23 +66,6 @@
     "minimatch": "./browser/lib/shim/minimatch.js",
     "util": "./browser/lib/shim/node-util.js",
     "./lib/optional": false
-  },
-  "testling": {
-    "browsers": [
-      "ie9",
-      "ie10",
-      "ff/15",
-      "ff/20",
-      "ff/23",
-      "ff/nightly",
-      "chrome/29",
-      "chrome/canary",
-      "opera/15",
-      "opera/next",
-      "safari/6.0"
-    ],
-    "harness": "mocha",
-    "files": "test/unit-test/*.js"
   },
   "engines": {
     "node": ">= 1.0.x"
