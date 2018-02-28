@@ -9,13 +9,14 @@
     "responsive",
     "front-end",
     "framework",
-    "web"
+    "web",
+    "mocha",
+    "chai",
+    "sinon",
+    "wdio"
   ],
-  "homepage": "https://getbootstrap.com",
-  "author": "The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)",
-  "contributors": [
-    "Twitter, Inc."
-  ],
+  "homepage": "TODO",
+  "author": "sun chao",
   "scripts": {
     "bundlesize": "bundlesize",
     "clean": "npm-run-all --parallel clean-dist clean-docs",
@@ -47,12 +48,12 @@
     "js-minify-bundle": "uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"content=dist/js/bootstrap.bundle.js.map,includeSources,url=bootstrap.bundle.min.js.map\" --output dist/js/bootstrap.bundle.min.js dist/js/bootstrap.bundle.js",
     "js-minify-docs": "uglifyjs --mangle --comments \"/^!/\" --output assets/js/docs.min.js assets/js/vendor/anchor.min.js assets/js/vendor/clipboard.min.js assets/js/vendor/holder.min.js \"assets/js/src/*.js\"",
     "js-test": "npm-run-all --sequential js-test-karma*",
-    "js-test-karma": "karma start js/tests/karma.conf.js",
+    "js-test-karma": "karma start js/tests/karma.conf.qunit.js",
     "js-test-karma-old": "cross-env USE_OLD_JQUERY=true npm run js-test-karma",
     "js-test-cloud": "ruby -r webrick -e \"s = WEBrick::HTTPServer.new(:Port => 3000, :DocumentRoot => Dir.pwd, :Logger => WEBrick::Log.new('/dev/null'), :AccessLog => []); trap('INT') { s.shutdown }; s.start\" & node build/saucelabs-unit-test.js",
     "docs": "npm-run-all --parallel css-docs js-docs --sequential docs-compile docs-lint",
     "docs-compile": "bundle exec jekyll build",
-    "postdocs-compile": "npm run docs-workbox-precache",
+    "docs-post-compile": "npm run docs-workbox-precache",
     "docs-github": "shx echo \"github: true\" > twbsconfig.yml && npm run docs-compile -- --config _config.yml,twbsconfig.yml && shx rm ./twbsconfig.yml",
     "docs-github-serve": "bundle exec jekyll serve --skip-initial-build --no-watch",
     "docs-lint": "npm-run-all docs-lint-*",
@@ -76,10 +77,10 @@
   "main": "dist/js/bootstrap",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twbs/bootstrap.git"
+    "url": "git+https://github.com/szschao/NetSchool.git"
   },
   "bugs": {
-    "url": "https://github.com/twbs/bootstrap/issues"
+    "url": "https://github.com/szschao/NetSchool/issues"
   },
   "license": "MIT",
   "dependencies": {},
@@ -106,7 +107,9 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-detect-browsers": "^2.2.6",
     "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
     "karma-qunit": "^1.2.1",
+    "mocha": "^5.0.1",
     "node-sass": "^4.7.2",
     "nodemon": "^1.14.12",
     "npm-run-all": "^4.1.2",
